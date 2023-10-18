@@ -14,6 +14,9 @@ interface GameDao {
     @Query("SELECT * FROM game")
     fun getAllGames(): LiveData<List<GameEntity>>
 
+    @Query("SELECT * FROM game where gameId = :id")
+    fun getDetailGame(id: Int): LiveData<GameEntity>
+
     @Query("SELECT * FROM game where isFavorite = 1")
     fun getFavoriteGames(): LiveData<List<GameEntity>>
 
@@ -21,5 +24,5 @@ interface GameDao {
     fun insertGames(game: List<GameEntity>)
 
     @Update
-    fun updateFavoriteGames(tourism: GameEntity)
+    fun updateGames(tourism: GameEntity)
 }

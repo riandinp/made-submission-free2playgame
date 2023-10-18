@@ -5,6 +5,7 @@ import androidx.lifecycle.Transformations
 import com.riandinp.freegamesdb.core.data.source.local.LocalDataSource
 import com.riandinp.freegamesdb.core.data.source.remote.RemoteDataSource
 import com.riandinp.freegamesdb.core.data.source.remote.network.ApiResponse
+import com.riandinp.freegamesdb.core.data.source.remote.response.DetailGameResponse
 import com.riandinp.freegamesdb.core.data.source.remote.response.GameResponse
 import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.core.domain.repository.IGameRepository
@@ -55,6 +56,42 @@ class GameRepository private constructor(
             DataMapper.mapEntitiesToDomain(it)
         }
     }
+
+    override fun getDetailGames(id: Int, gameData: Game): LiveData<Resource<Game>> =
+        object : NetworkBoundResource<Game, DetailGameResponse>(appExecutors) {
+            override fun loadFromDB(): LiveData<Game> {
+                return Transformations.map(localDataSource.getDetailGame(id)) { entity ->
+                    Game(
+                        id = entity.id,
+                        title = entity.title,
+                        thumbnail = entity.thumbnail,
+                        shortDescription = entity.shortDescription,
+                        gameUrl = entity.gameUrl,
+                        genre = entity.genre,
+                        platform = entity.platform,
+                        publisher = entity.publisher,
+                        developer = entity.developer,
+                        releaseDate = entity.releaseDate,
+                        freetogameProfileUrl = entity.freetogameProfileUrl,
+                        description = entity.description,
+                        screenshots = entity.screenshots
+                    )
+                }
+            }
+
+            override fun createCall(): LiveData<ApiResponse<DetailGameResponse>> =
+                remoteDataSource.getDetailGames(id)
+
+            override fun saveCallResult(data: DetailGameResponse) {
+                val listScreenshots = mutableListOf<String>()
+                val gameEntity = DataMapper.mapDomainToEntity(gameData)
+                appExecutors.diskIO().execute { localDataSource.updateDetailGames(gameEntity, data.description, listScreenshots) }
+            }
+
+            override fun shouldFetch(data: Game?): Boolean =
+                data?.description.isNullOrEmpty() || data?.screenshots.isNullOrEmpty()
+
+        }.asLiveData()
 
     override fun setFavoriteGames(game: Game, state: Boolean) {
         val gameEntity = DataMapper.mapDomainToEntity(game)

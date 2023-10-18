@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.riandinp.freegamesdb.MainViewModel
-import com.riandinp.freegamesdb.core.data.GameRepository
 import com.riandinp.freegamesdb.core.di.Injection
 import com.riandinp.freegamesdb.core.domain.usecase.GameUseCase
+import com.riandinp.freegamesdb.detail.DetailViewModel
 
 class ViewModelFactory private constructor(private val gameUseCase: GameUseCase) :
     ViewModelProvider.NewInstanceFactory() {
@@ -30,6 +30,10 @@ class ViewModelFactory private constructor(private val gameUseCase: GameUseCase)
         when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(gameUseCase) as T
+            }
+
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(gameUseCase) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

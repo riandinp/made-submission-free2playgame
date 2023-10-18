@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -55,4 +56,7 @@ dependencies {
     implementation("androidx.room:room-runtime:2.5.2")
     annotationProcessor("androidx.room:room-compiler:2.5.2")
     ksp("androidx.room:room-compiler:2.5.2")
+
+    implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
+    implementation("com.github.jd-alexander:LikeButton:0.2.3")
 }

@@ -10,8 +10,9 @@ import com.bumptech.glide.Glide
 import com.riandinp.freegamesdb.R
 import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.databinding.ItemGameBinding
+import com.riandinp.freegamesdb.utils.getPublisherDeveloper
 
-class CardGameAdapter : ListAdapter<Game, CardGameAdapter.CardGameViewHolder>(DIFF_CALLBACK) {
+class CardGameAdapter(private val onItemClickListener: OnItemClickListener? = null) : ListAdapter<Game, CardGameAdapter.CardGameViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardGameViewHolder =
         CardGameViewHolder(
@@ -22,9 +23,8 @@ class CardGameAdapter : ListAdapter<Game, CardGameAdapter.CardGameViewHolder>(DI
         holder.bind(getItem(position))
     }
 
-    private fun getPublisherDeveloper(publisher: String, developer: String): String {
-        return if (publisher == developer) publisher
-        else "${publisher}/${developer}"
+    interface OnItemClickListener {
+        fun onItemClickListener(game: Game)
     }
 
     inner class CardGameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,6 +38,7 @@ class CardGameAdapter : ListAdapter<Game, CardGameAdapter.CardGameViewHolder>(DI
                 tvTitleGame.text = data.title
                 tvPublisherDeveloper.text = getPublisherDeveloper(data.publisher, data.developer)
                 tvReleaseDate.text = data.releaseDate
+                clContent.setOnClickListener { onItemClickListener?.onItemClickListener(data) }
             }
         }
     }

@@ -9,5 +9,7 @@ interface IGameRepository {
 
     fun getFavoriteGames(): LiveData<List<Game>>
 
+    fun getDetailGames(id: Int, gameData: Game): LiveData<Resource<Game>>
+
     fun setFavoriteGames(game: Game, state: Boolean)
 }

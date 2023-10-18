@@ -10,6 +10,7 @@ import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.core.ui.CardGameAdapter
 import com.riandinp.freegamesdb.core.ui.ViewModelFactory
 import com.riandinp.freegamesdb.databinding.ActivityMainBinding
+import com.riandinp.freegamesdb.detail.DetailGameActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -46,7 +47,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRecycleView(data: List<Game>?) {
         binding.rvCardGame.apply {
-            val gameAdapter = CardGameAdapter()
+            val gameAdapter = CardGameAdapter(object : CardGameAdapter.OnItemClickListener {
+                override fun onItemClickListener(game: Game) {
+                    DetailGameActivity.start(this@MainActivity, game)
+                }
+            })
             gameAdapter.submitList(data)
             adapter = gameAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)

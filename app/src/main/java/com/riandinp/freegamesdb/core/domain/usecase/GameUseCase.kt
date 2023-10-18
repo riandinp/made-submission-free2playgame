@@ -8,4 +8,6 @@ interface GameUseCase {
     fun getAllGames(): LiveData<Resource<List<Game>>>
     fun getFavoriteGames(): LiveData<List<Game>>
     fun setFavoriteGames(game: Game, state: Boolean)
+    fun getDetailGame(id: Int, gameData: Game): LiveData<Resource<Game>>
+
 }

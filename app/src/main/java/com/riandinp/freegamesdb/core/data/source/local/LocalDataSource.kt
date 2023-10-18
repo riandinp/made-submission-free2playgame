@@ -17,12 +17,20 @@ class LocalDataSource private constructor(private val gameDao: GameDao) {
 
     fun getAllGames(): LiveData<List<GameEntity>> = gameDao.getAllGames()
 
+    fun getDetailGame(id: Int): LiveData<GameEntity> = gameDao.getDetailGame(id)
+
     fun getFavoriteGames(): LiveData<List<GameEntity>> = gameDao.getFavoriteGames()
 
     fun insertGames(gameList: List<GameEntity>) = gameDao.insertGames(gameList)
 
+    fun updateDetailGames(game: GameEntity, description: String, screenshots: List<String>) {
+        game.description = description
+        game.screenshots = screenshots
+        gameDao.updateGames(game)
+    }
+
     fun setFavoriteGames(game: GameEntity, newState: Boolean) {
         game.isFavorite = newState
-        gameDao.updateFavoriteGames(game)
+        gameDao.updateGames(game)
     }
 }

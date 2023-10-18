@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Description"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="#A33838"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dv_description"
+        android:layout_width="120dp"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        app:dividerColor="#A33838"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/tv_description"
+        app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+    <TextView
+        android:id="@+id/tv_description_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:justificationMode="inter_word"
+        android:text="@string/dump_description"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dv_description"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/tv_publisher_developer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Publisher/Developer"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="#A33838"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_description_detail" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dv_publisher_developer"
+        android:layout_width="120dp"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        app:dividerColor="#A33838"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/tv_description"
+        app:layout_constraintTop_toBottomOf="@id/tv_publisher_developer" />
+
+    <TextView
+        android:id="@+id/tv_publisher_developer_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dump_publisher_developer"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dv_publisher_developer" />
+
+    <TextView
+        android:id="@+id/tv_release_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Release Date"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="#A33838"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_publisher_developer_detail" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dv_release_date"
+        android:layout_width="120dp"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        app:dividerColor="#A33838"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/tv_description"
+        app:layout_constraintTop_toBottomOf="@id/tv_release_date" />
+
+    <TextView
+        android:id="@+id/tv_release_date_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dump_release_date"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dv_release_date" />
+
+    <TextView
+        android:id="@+id/tv_screenshots"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Gallery/Screenshots"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="#A33838"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_release_date_detail" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dv_screenshots"
+        android:layout_width="120dp"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        app:dividerColor="#A33838"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/tv_description"
+        app:layout_constraintTop_toBottomOf="@id/tv_screenshots" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_screenshots"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dv_screenshots"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_screenshot" />
+
+    <Button
+        android:id="@+id/btn_get_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="#A33838"
+        android:drawableEnd="@drawable/arrow_forward_ios_24"
+        android:minWidth="150dp"
+        android:text="Get More Info"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tv_screenshots"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/tv_screenshots"
+        app:layout_constraintTop_toBottomOf="@id/rv_screenshots" />
+</androidx.constraintlayout.widget.ConstraintLayout>

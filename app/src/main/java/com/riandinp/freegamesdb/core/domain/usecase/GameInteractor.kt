@@ -12,4 +12,7 @@ class GameInteractor(private val gameRepository: IGameRepository) : GameUseCase 
 
     override fun setFavoriteGames(game: Game, state: Boolean) =
         gameRepository.setFavoriteGames(game, state)
+
+    override fun getDetailGame(id: Int, gameData: Game): LiveData<Resource<Game>> =
+        gameRepository.getDetailGames(id, gameData)
 }
