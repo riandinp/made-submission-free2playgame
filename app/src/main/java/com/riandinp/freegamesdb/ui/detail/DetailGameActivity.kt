@@ -44,7 +44,6 @@ class DetailGameActivity : AppCompatActivity() {
         }
 
         if (detailGame != null) {
-            val gameTitle = detailGame.title
             binding.tvToolbarTitle.text = detailGame.title
             binding.apply {
                 Glide.with(this@DetailGameActivity)
@@ -52,11 +51,7 @@ class DetailGameActivity : AppCompatActivity() {
                     .placeholder(R.drawable.placeholder)
                     .into(ivThumbnail)
 
-                tvTitleGame.text = if(gameTitle.length < 33) {
-                    gameTitle
-                } else {
-                    getString(R.string.overflow_toolbar_title, gameTitle.subSequence(0,25))
-                }
+                tvTitleGame.text = detailGame.title
                 // show Platform icon
                 ivWindows.isVisible = detailGame.platform.contains("PC", true)
                 ivBrowser.isVisible = detailGame.platform.contains("Web", true)
