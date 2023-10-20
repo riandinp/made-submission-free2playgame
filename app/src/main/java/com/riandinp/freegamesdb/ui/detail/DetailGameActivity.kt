@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +35,6 @@ class DetailGameActivity : AppCompatActivity() {
         detailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val detailGame = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(EXTRA_DATA, Game::class.java)
@@ -44,12 +44,19 @@ class DetailGameActivity : AppCompatActivity() {
         }
 
         if (detailGame != null) {
+            val gameTitle = detailGame.title
+            binding.tvToolbarTitle.text = detailGame.title
             binding.apply {
                 Glide.with(this@DetailGameActivity)
                     .load(detailGame.thumbnail)
                     .placeholder(R.drawable.placeholder)
                     .into(ivThumbnail)
-                tvTitleGame.text = detailGame.title
+
+                tvTitleGame.text = if(gameTitle.length < 33) {
+                    gameTitle
+                } else {
+                    getString(R.string.overflow_toolbar_title, gameTitle.subSequence(0,25))
+                }
                 // show Platform icon
                 ivWindows.isVisible = detailGame.platform.contains("PC", true)
                 ivBrowser.isVisible = detailGame.platform.contains("Web", true)
@@ -57,20 +64,18 @@ class DetailGameActivity : AppCompatActivity() {
             initObserver(detailGame)
         }
 
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
 
         binding.appBar.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
-            var isShow = false
             var scrollRange = -1
             override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
                 if (scrollRange == -1) {
                     scrollRange = appBarLayout?.totalScrollRange!!
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    binding.cToolbar.title = detailGame?.title
-                    isShow = false
-                } else if (!isShow) {
-                    binding.cToolbar.title = " "
-                    isShow = true
+                } else {
+                    Log.d("OffsetAppBar", "verticalOffset = $verticalOffset, scrollRange = $scrollRange")
+                    binding.tvToolbarTitle.isVisible = scrollRange + verticalOffset <= 80
                 }
             }
         })

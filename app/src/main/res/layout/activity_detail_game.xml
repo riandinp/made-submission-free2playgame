@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
+            app:title=" "
             app:contentScrim="?attr/colorOnPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -24,14 +25,21 @@
                 android:layout_height="wrap_content"
                 app:layout_collapseMode="none">
 
-                <ImageView
-                    android:id="@+id/iv_thumbnail"
+                <FrameLayout
+                    android:id="@+id/fl_thumbnail"
                     android:layout_width="match_parent"
                     android:layout_height="205dp"
-                    android:importantForAccessibility="no"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/placeholder"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:foreground="@drawable/inner_shadow_image">
+                    <ImageView
+                        android:id="@+id/iv_thumbnail"
+                        android:layout_width="match_parent"
+                        android:layout_height="205dp"
+                        android:importantForAccessibility="no"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/placeholder" />
+                </FrameLayout>
+
 
                 <TextView
                     android:id="@+id/tv_title_game"
@@ -44,7 +52,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/favorite_button"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_thumbnail" />
+                    app:layout_constraintTop_toBottomOf="@id/fl_thumbnail" />
 
                 <ImageView
                     android:id="@+id/iv_windows"
@@ -70,7 +78,7 @@
                     android:translationX="8dp"
                     app:anim_scale_factor="2.5"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_thumbnail" />
+                    app:layout_constraintTop_toBottomOf="@id/fl_thumbnail" />
 
                 <ImageView
                     android:id="@+id/iv_browser"
@@ -88,11 +96,23 @@
                     app:tint="?attr/colorOnBackground" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/round_back_24">
+                <TextView
+                    android:id="@+id/tv_toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+            </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
