@@ -57,10 +57,10 @@ class GameRepository private constructor(
         }
     }
 
-    override fun getDetailGames(id: Int, gameData: Game): LiveData<Resource<Game>> =
+    override fun getDetailGames(gameData: Game): LiveData<Resource<Game>> =
         object : NetworkBoundResource<Game, DetailGameResponse>(appExecutors) {
             override fun loadFromDB(): LiveData<Game> {
-                return Transformations.map(localDataSource.getDetailGame(id)) { entity ->
+                return Transformations.map(localDataSource.getDetailGame(gameData.id)) { entity ->
                     Game(
                         id = entity.id,
                         title = entity.title,
@@ -74,13 +74,14 @@ class GameRepository private constructor(
                         releaseDate = entity.releaseDate,
                         freetogameProfileUrl = entity.freetogameProfileUrl,
                         description = entity.description,
-                        screenshots = entity.screenshots
+                        screenshots = entity.screenshots,
+                        isFavorite = entity.isFavorite
                     )
                 }
             }
 
             override fun createCall(): LiveData<ApiResponse<DetailGameResponse>> =
-                remoteDataSource.getDetailGames(id)
+                remoteDataSource.getDetailGames(gameData.id)
 
             override fun saveCallResult(data: DetailGameResponse) {
                 val listScreenshots = mutableListOf<String>()

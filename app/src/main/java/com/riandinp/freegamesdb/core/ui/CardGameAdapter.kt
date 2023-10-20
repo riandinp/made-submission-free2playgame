@@ -49,7 +49,31 @@ class CardGameAdapter(private val onItemClickListener: OnItemClickListener? = nu
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean =
-                oldItem == newItem
+                Game(
+                    id = oldItem.id,
+                    title= oldItem.title,
+                    thumbnail = oldItem.thumbnail,
+                    shortDescription = oldItem.shortDescription,
+                    gameUrl = oldItem.gameUrl,
+                    platform = oldItem.platform,
+                    publisher = oldItem.publisher,
+                    developer = oldItem.developer,
+                    releaseDate = oldItem.releaseDate,
+                    genre = oldItem.genre,
+                    freetogameProfileUrl = oldItem.freetogameProfileUrl
+                ) == Game(
+                    id = newItem.id,
+                    title= newItem.title,
+                    thumbnail = newItem.thumbnail,
+                    shortDescription = newItem.shortDescription,
+                    gameUrl = newItem.gameUrl,
+                    platform = newItem.platform,
+                    publisher = newItem.publisher,
+                    developer = newItem.developer,
+                    releaseDate = newItem.releaseDate,
+                    genre = newItem.genre,
+                    freetogameProfileUrl = newItem.freetogameProfileUrl
+                )
         }
     }
 }

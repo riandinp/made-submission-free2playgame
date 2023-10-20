@@ -47,5 +47,5 @@ data class GameEntity(
     var screenshots: List<String> = emptyList(),
 
     @ColumnInfo(name = "isFavorite")
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean
 )

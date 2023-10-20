@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.riandinp.freegamesdb.MainViewModel
 import com.riandinp.freegamesdb.core.di.Injection
 import com.riandinp.freegamesdb.core.domain.usecase.GameUseCase
-import com.riandinp.freegamesdb.detail.DetailViewModel
+import com.riandinp.freegamesdb.ui.detail.DetailViewModel
 
 class ViewModelFactory private constructor(private val gameUseCase: GameUseCase) :
     ViewModelProvider.NewInstanceFactory() {

@@ -19,7 +19,8 @@ object DataMapper {
                 publisher = response.publisher,
                 developer = response.developer,
                 releaseDate = response.releaseDate,
-                freetogameProfileUrl = response.freetogameProfileUrl
+                freetogameProfileUrl = response.freetogameProfileUrl,
+                isFavorite = false
             )
             gameList.add(game)
         }
@@ -32,6 +33,7 @@ object DataMapper {
                 id = entity.id,
                 title = entity.title,
                 thumbnail = entity.thumbnail,
+                description = entity.description,
                 shortDescription = entity.shortDescription,
                 gameUrl = entity.gameUrl,
                 genre = entity.genre,
@@ -39,7 +41,9 @@ object DataMapper {
                 publisher = entity.publisher,
                 developer = entity.developer,
                 releaseDate = entity.releaseDate,
-                freetogameProfileUrl = entity.freetogameProfileUrl
+                freetogameProfileUrl = entity.freetogameProfileUrl,
+                screenshots = entity.screenshots,
+                isFavorite = entity.isFavorite
             )
         }
 
@@ -47,6 +51,7 @@ object DataMapper {
         id = input.id,
         title = input.title,
         thumbnail = input.thumbnail,
+        description = input.description,
         shortDescription = input.shortDescription,
         gameUrl = input.gameUrl,
         genre = input.genre,
@@ -54,6 +59,8 @@ object DataMapper {
         publisher = input.publisher,
         developer = input.developer,
         releaseDate = input.releaseDate,
-        freetogameProfileUrl = input.freetogameProfileUrl
+        freetogameProfileUrl = input.freetogameProfileUrl,
+        screenshots = input.screenshots,
+        isFavorite = input.isFavorite
     )
 }
