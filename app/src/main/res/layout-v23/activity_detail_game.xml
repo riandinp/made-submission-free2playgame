@@ -28,10 +28,12 @@
                     android:id="@+id/iv_thumbnail"
                     android:layout_width="match_parent"
                     android:layout_height="205dp"
+                    android:foreground="@drawable/inner_shadow_image"
                     android:importantForAccessibility="no"
                     android:scaleType="centerCrop"
                     android:src="@drawable/placeholder"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:targetApi="m" />
 
                 <TextView
                     android:id="@+id/tv_title_game"

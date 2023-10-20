@@ -85,6 +85,9 @@ class GameRepository private constructor(
             override fun saveCallResult(data: DetailGameResponse) {
                 val listScreenshots = mutableListOf<String>()
                 val gameEntity = DataMapper.mapDomainToEntity(gameData)
+                data.screenshots.forEach { screenshotsItem ->
+                    listScreenshots.add(screenshotsItem.image)
+                }
                 appExecutors.diskIO().execute { localDataSource.updateDetailGames(gameEntity, data.description, listScreenshots) }
             }
 
