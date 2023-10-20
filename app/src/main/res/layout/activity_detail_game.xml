@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.detail.DetailGameActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -17,7 +18,7 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:title=" "
-            app:contentScrim="?attr/colorOnPrimary"
+            app:contentScrim="?attr/colorSurface"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,6 +50,8 @@
                     android:text="@string/dump_title_game"
                     android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                     android:textSize="24sp"
+                    android:maxLines="3"
+                    android:ellipsize="end"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/favorite_button"
                     app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
+                android:elevation="4dp"
                 app:navigationIcon="@drawable/round_back_24">
                 <TextView
                     android:id="@+id/tv_toolbar_title"
@@ -109,7 +113,6 @@
                     android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                     android:textSize="18sp"
                     android:textStyle="bold"
-
                     android:maxLines="1"
                     android:ellipsize="end"/>
             </com.google.android.material.appbar.MaterialToolbar>

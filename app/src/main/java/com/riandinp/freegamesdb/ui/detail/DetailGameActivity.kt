@@ -2,12 +2,14 @@ package com.riandinp.freegamesdb.ui.detail
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -30,6 +32,11 @@ class DetailGameActivity : AppCompatActivity() {
 
         binding = ActivityDetailGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //set status bar background color
+//        val surfaceColor = MaterialColors.getColor(binding.root, com.google.android.material.R.attr.colorSurface)
+        window.statusBarColor = Color.TRANSPARENT
+        WindowInsetsControllerCompat(window, binding.root).isAppearanceLightStatusBars = true
 
         val factory = ViewModelFactory.getInstance(this)
         detailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
