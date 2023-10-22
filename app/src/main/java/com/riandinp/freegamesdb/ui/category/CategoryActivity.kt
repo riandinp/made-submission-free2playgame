@@ -4,19 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.core.ui.CardGameAdapter
-import com.riandinp.freegamesdb.core.ui.ViewModelFactory
 import com.riandinp.freegamesdb.databinding.ActivityCategoryBinding
 import com.riandinp.freegamesdb.ui.detail.DetailGameActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CategoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCategoryBinding
-    private lateinit var categoryViewModel: CategoryViewModel
     private lateinit var gameAdapter: CardGameAdapter
+
+    private val categoryViewModel: CategoryViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +27,6 @@ class CategoryActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         supportActionBar?.title = null
-
-        val factory = ViewModelFactory.getInstance(this)
-        categoryViewModel = ViewModelProvider(this, factory)[CategoryViewModel::class.java]
 
         setRecycleView()
 

@@ -4,16 +4,7 @@ import com.riandinp.freegamesdb.core.data.source.local.entity.GameEntity
 import com.riandinp.freegamesdb.core.data.source.local.room.GameDao
 import kotlinx.coroutines.flow.Flow
 
-class LocalDataSource private constructor(private val gameDao: GameDao) {
-
-    companion object {
-        private var instance: LocalDataSource? = null
-
-        fun getInstance(gameDao: GameDao): LocalDataSource =
-            instance ?: synchronized(this) {
-                instance ?: LocalDataSource(gameDao)
-            }
-    }
+class LocalDataSource(private val gameDao: GameDao) {
 
     fun getAllGames(): Flow<List<GameEntity>> = gameDao.getAllGames()
 

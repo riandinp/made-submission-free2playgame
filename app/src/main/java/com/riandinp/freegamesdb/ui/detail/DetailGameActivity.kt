@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
@@ -23,14 +22,15 @@ import com.riandinp.freegamesdb.R
 import com.riandinp.freegamesdb.core.data.Resource
 import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.core.ui.CardScreenshotsAdapter
-import com.riandinp.freegamesdb.core.ui.ViewModelFactory
 import com.riandinp.freegamesdb.databinding.ActivityDetailGameBinding
 import com.riandinp.freegamesdb.utils.getPublisherDeveloper
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailGameBinding
-    private lateinit var detailViewModel: DetailViewModel
     private lateinit var screenshotsAdapter: CardScreenshotsAdapter
+
+    private val detailViewModel: DetailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +40,6 @@ class DetailGameActivity : AppCompatActivity() {
 
         window.statusBarColor = Color.TRANSPARENT
         WindowInsetsControllerCompat(window, binding.root).isAppearanceLightStatusBars = true
-
-        val factory = ViewModelFactory.getInstance(this)
-        detailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         setSupportActionBar(binding.toolbar)
 

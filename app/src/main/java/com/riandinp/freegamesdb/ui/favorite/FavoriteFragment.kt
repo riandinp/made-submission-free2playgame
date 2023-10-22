@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.core.ui.CardGameAdapter
-import com.riandinp.freegamesdb.core.ui.ViewModelFactory
 import com.riandinp.freegamesdb.databinding.FragmentFavoriteBinding
 import com.riandinp.freegamesdb.ui.detail.DetailGameActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -21,8 +20,9 @@ import com.riandinp.freegamesdb.ui.detail.DetailGameActivity
  */
 class FavoriteFragment : Fragment() {
 
-    private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var gameAdapter: CardGameAdapter
+
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
@@ -38,8 +38,6 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = ViewModelFactory.getInstance(requireActivity())
-        favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
 
         setRecycleView()
         setObserver()
