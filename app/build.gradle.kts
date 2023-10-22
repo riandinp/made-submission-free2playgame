@@ -59,4 +59,8 @@ dependencies {
 
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
     implementation("com.github.jd-alexander:LikeButton:0.2.3")
+
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
 }
