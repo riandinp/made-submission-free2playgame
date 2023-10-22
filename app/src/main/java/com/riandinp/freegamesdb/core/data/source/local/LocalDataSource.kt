@@ -1,8 +1,8 @@
 package com.riandinp.freegamesdb.core.data.source.local
 
-import androidx.lifecycle.LiveData
 import com.riandinp.freegamesdb.core.data.source.local.entity.GameEntity
 import com.riandinp.freegamesdb.core.data.source.local.room.GameDao
+import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource private constructor(private val gameDao: GameDao) {
 
@@ -15,15 +15,15 @@ class LocalDataSource private constructor(private val gameDao: GameDao) {
             }
     }
 
-    fun getAllGames(): LiveData<List<GameEntity>> = gameDao.getAllGames()
+    fun getAllGames(): Flow<List<GameEntity>> = gameDao.getAllGames()
 
-    fun getDetailGame(id: Int): LiveData<GameEntity> = gameDao.getDetailGame(id)
+    fun getDetailGame(id: Int): Flow<GameEntity> = gameDao.getDetailGame(id)
 
-    fun getFavoriteGames(): LiveData<List<GameEntity>> = gameDao.getFavoriteGames()
+    fun getFavoriteGames(): Flow<List<GameEntity>> = gameDao.getFavoriteGames()
 
-    fun getAllGamesBasedOnCategory(category: String): LiveData<List<GameEntity>> = gameDao.getAllGamesBasedOnCategory("%$category%")
+    fun getAllGamesBasedOnCategory(category: String): Flow<List<GameEntity>> = gameDao.getAllGamesBasedOnCategory("%$category%")
 
-    fun insertGames(gameList: List<GameEntity>) = gameDao.insertGames(gameList)
+    suspend fun insertGames(gameList: List<GameEntity>) = gameDao.insertGames(gameList)
 
     fun updateDetailGames(game: GameEntity, description: String, screenshots: List<String>) {
         game.description = description

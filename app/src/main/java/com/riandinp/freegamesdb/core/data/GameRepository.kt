@@ -1,7 +1,5 @@
 package com.riandinp.freegamesdb.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.riandinp.freegamesdb.core.data.source.local.LocalDataSource
 import com.riandinp.freegamesdb.core.data.source.remote.RemoteDataSource
 import com.riandinp.freegamesdb.core.data.source.remote.network.ApiResponse
@@ -11,6 +9,8 @@ import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.core.domain.repository.IGameRepository
 import com.riandinp.freegamesdb.core.utlis.AppExecutors
 import com.riandinp.freegamesdb.core.utlis.DataMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class GameRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -31,42 +31,36 @@ class GameRepository private constructor(
             }
     }
 
-    override fun getAllGames(): LiveData<Resource<List<Game>>> =
-        object : NetworkBoundResource<List<Game>, List<GameResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Game>> {
-                return Transformations.map(localDataSource.getAllGames()) {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
+    override fun getAllGames(): Flow<Resource<List<Game>>> =
+        object : NetworkBoundResource<List<Game>, List<GameResponse>>() {
+            override fun loadFromDB(): Flow<List<Game>> {
+                return localDataSource.getAllGames().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<Game>?): Boolean =
                 data.isNullOrEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<GameResponse>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<GameResponse>>> =
                 remoteDataSource.getAllGames()
 
-            override fun saveCallResult(data: List<GameResponse>) {
+            override suspend fun saveCallResult(data: List<GameResponse>) {
                 val gameList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertGames(gameList)
             }
-        }.asLiveData()
+        }.asFlow()
 
-    override fun getFavoriteGames(): LiveData<List<Game>> {
-        return Transformations.map(localDataSource.getFavoriteGames()) {
-            DataMapper.mapEntitiesToDomain(it)
-        }
+    override fun getFavoriteGames(): Flow<List<Game>> {
+        return localDataSource.getFavoriteGames().map { DataMapper.mapEntitiesToDomain(it) }
     }
 
-    override fun getAllGamesBasedOnCategory(category: String): LiveData<List<Game>> {
-        return Transformations.map(localDataSource.getAllGamesBasedOnCategory(category)) {
-            DataMapper.mapEntitiesToDomain(it)
-        }
+    override fun getAllGamesBasedOnCategory(category: String): Flow<List<Game>> {
+        return localDataSource.getAllGamesBasedOnCategory(category).map { DataMapper.mapEntitiesToDomain(it) }
     }
 
-    override fun getDetailGames(gameData: Game): LiveData<Resource<Game>> =
-        object : NetworkBoundResource<Game, DetailGameResponse>(appExecutors) {
-            override fun loadFromDB(): LiveData<Game> {
-                return Transformations.map(localDataSource.getDetailGame(gameData.id)) { entity ->
+    override fun getDetailGames(gameData: Game): Flow<Resource<Game>> =
+        object : NetworkBoundResource<Game, DetailGameResponse>() {
+            override fun loadFromDB(): Flow<Game> {
+                return localDataSource.getDetailGame(gameData.id).map { entity ->
                     Game(
                         id = entity.id,
                         title = entity.title,
@@ -86,10 +80,10 @@ class GameRepository private constructor(
                 }
             }
 
-            override fun createCall(): LiveData<ApiResponse<DetailGameResponse>> =
+            override suspend fun createCall(): Flow<ApiResponse<DetailGameResponse>> =
                 remoteDataSource.getDetailGames(gameData.id)
 
-            override fun saveCallResult(data: DetailGameResponse) {
+            override suspend fun saveCallResult(data: DetailGameResponse) {
                 val listScreenshots = mutableListOf<String>()
                 val gameEntity = DataMapper.mapDomainToEntity(gameData)
                 data.screenshots.forEach { screenshotsItem ->
@@ -101,7 +95,7 @@ class GameRepository private constructor(
             override fun shouldFetch(data: Game?): Boolean =
                 data?.description.isNullOrEmpty() || data?.screenshots.isNullOrEmpty()
 
-        }.asLiveData()
+        }.asFlow()
 
     override fun setFavoriteGames(game: Game, state: Boolean) {
         val gameEntity = DataMapper.mapDomainToEntity(game)
