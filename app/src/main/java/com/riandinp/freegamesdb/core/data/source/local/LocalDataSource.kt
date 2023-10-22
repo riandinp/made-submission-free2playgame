@@ -21,6 +21,8 @@ class LocalDataSource private constructor(private val gameDao: GameDao) {
 
     fun getFavoriteGames(): LiveData<List<GameEntity>> = gameDao.getFavoriteGames()
 
+    fun getAllGamesBasedOnCategory(category: String): LiveData<List<GameEntity>> = gameDao.getAllGamesBasedOnCategory("%$category%")
+
     fun insertGames(gameList: List<GameEntity>) = gameDao.insertGames(gameList)
 
     fun updateDetailGames(game: GameEntity, description: String, screenshots: List<String>) {

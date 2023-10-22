@@ -57,6 +57,12 @@ class GameRepository private constructor(
         }
     }
 
+    override fun getAllGamesBasedOnCategory(category: String): LiveData<List<Game>> {
+        return Transformations.map(localDataSource.getAllGamesBasedOnCategory(category)) {
+            DataMapper.mapEntitiesToDomain(it)
+        }
+    }
+
     override fun getDetailGames(gameData: Game): LiveData<Resource<Game>> =
         object : NetworkBoundResource<Game, DetailGameResponse>(appExecutors) {
             override fun loadFromDB(): LiveData<Game> {

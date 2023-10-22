@@ -7,6 +7,7 @@ import com.riandinp.freegamesdb.core.domain.model.Game
 interface GameUseCase {
     fun getAllGames(): LiveData<Resource<List<Game>>>
     fun getFavoriteGames(): LiveData<List<Game>>
+    fun getAllGamesBasedOnCategory(category: String): LiveData<List<Game>>
     fun setFavoriteGames(game: Game, state: Boolean)
     fun getDetailGame(gameData: Game): LiveData<Resource<Game>>
 }

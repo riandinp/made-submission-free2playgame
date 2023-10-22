@@ -33,8 +33,6 @@ class DetailGameActivity : AppCompatActivity() {
         binding = ActivityDetailGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //set status bar background color
-//        val surfaceColor = MaterialColors.getColor(binding.root, com.google.android.material.R.attr.colorSurface)
         window.statusBarColor = Color.TRANSPARENT
         WindowInsetsControllerCompat(window, binding.root).isAppearanceLightStatusBars = true
 

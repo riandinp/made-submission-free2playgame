@@ -9,6 +9,8 @@ interface IGameRepository {
 
     fun getFavoriteGames(): LiveData<List<Game>>
 
+    fun getAllGamesBasedOnCategory(category: String): LiveData<List<Game>>
+
     fun getDetailGames(gameData: Game): LiveData<Resource<Game>>
 
     fun setFavoriteGames(game: Game, state: Boolean)
