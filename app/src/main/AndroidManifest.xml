@@ -28,7 +28,14 @@
             android:exported="false" />
         <activity
             android:name=".ui.detail.DetailGameActivity"
-            android:exported="false" />
+            android:exported="false"/>
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
 
 </manifest>

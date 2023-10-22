@@ -11,7 +11,7 @@
         android:id="@+id/iv_screenshot"
         android:layout_width="250dp"
         android:layout_height="150dp"
-        android:importantForAccessibility="no"
+        android:contentDescription="@string/gallery_screenshots"
         android:src="@drawable/placeholder"
         android:scaleType="centerCrop"/>
 

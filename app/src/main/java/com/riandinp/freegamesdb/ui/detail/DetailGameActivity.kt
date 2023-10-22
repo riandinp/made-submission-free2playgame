@@ -3,6 +3,7 @@ package com.riandinp.freegamesdb.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +11,10 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.like.LikeButton
@@ -19,6 +22,7 @@ import com.like.OnLikeListener
 import com.riandinp.freegamesdb.R
 import com.riandinp.freegamesdb.core.data.Resource
 import com.riandinp.freegamesdb.core.domain.model.Game
+import com.riandinp.freegamesdb.core.ui.CardScreenshotsAdapter
 import com.riandinp.freegamesdb.core.ui.ViewModelFactory
 import com.riandinp.freegamesdb.databinding.ActivityDetailGameBinding
 import com.riandinp.freegamesdb.utils.getPublisherDeveloper
@@ -26,6 +30,7 @@ import com.riandinp.freegamesdb.utils.getPublisherDeveloper
 class DetailGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailGameBinding
     private lateinit var detailViewModel: DetailViewModel
+    private lateinit var screenshotsAdapter: CardScreenshotsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +69,8 @@ class DetailGameActivity : AppCompatActivity() {
             initObserver(detailGame)
         }
 
+        setRecycleView()
+
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
@@ -90,6 +97,15 @@ class DetailGameActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setRecycleView() {
+        screenshotsAdapter = CardScreenshotsAdapter()
+        binding.content.rvScreenshots.apply {
+            adapter = screenshotsAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
     }
 
     private fun setLoadingScreen(value: Boolean) {
@@ -149,6 +165,21 @@ class DetailGameActivity : AppCompatActivity() {
                     tvPublisherDeveloperDetail.text =
                         getPublisherDeveloper(game.publisher, game.developer)
                     tvReleaseDateDetail.text = game.releaseDate
+
+                    // set screenshot content
+                    screenshotsAdapter.submitList(game.screenshots)
+
+                    rvScreenshots.isInvisible = game.screenshots.isEmpty()
+                    tvNoScreenshot.isVisible = game.screenshots.isEmpty()
+
+                    // open web button
+                    btnGetInfo.setOnClickListener {
+                        val webpage: Uri = Uri.parse(game.freetogameProfileUrl)
+                        val intent = Intent(Intent.ACTION_VIEW, webpage)
+                        if (intent.resolveActivity(packageManager) != null) {
+                            startActivity(intent)
+                        }
+                    }
                 }
 
             } else {
