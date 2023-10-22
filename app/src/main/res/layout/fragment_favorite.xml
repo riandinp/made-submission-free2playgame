@@ -20,7 +20,7 @@
 
     <include
         android:id="@+id/vw_no_data"
-        layout="@layout/item_empty"
+        layout="@layout/view_empty"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

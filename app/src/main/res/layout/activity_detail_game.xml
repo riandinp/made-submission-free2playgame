@@ -136,6 +136,6 @@
     <include
         android:id="@+id/vw_error"
         android:visibility="gone"
-        layout="@layout/item_error"
+        layout="@layout/view_error"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
