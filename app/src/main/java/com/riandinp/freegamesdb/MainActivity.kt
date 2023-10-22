@@ -5,18 +5,18 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
-import com.riandinp.freegamesdb.databinding.ActivityMain2Binding
+import com.riandinp.freegamesdb.databinding.ActivityMainBinding
 import com.riandinp.freegamesdb.ui.category.CategoryListFragment
 import com.riandinp.freegamesdb.ui.favorite.FavoriteFragment
 import com.riandinp.freegamesdb.ui.home.HomeFragment
 
-class MainActivity2 : AppCompatActivity(), NavigationBarView.OnItemSelectedListener{
+class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener{
 
-    private lateinit var binding: ActivityMain2Binding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMain2Binding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
         supportActionBar?.title = null
