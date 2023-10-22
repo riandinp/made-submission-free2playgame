@@ -3,7 +3,6 @@ package com.riandinp.freegamesdb.core.ui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.riandinp.freegamesdb.MainViewModel
 import com.riandinp.freegamesdb.core.di.Injection
 import com.riandinp.freegamesdb.core.domain.usecase.GameUseCase
 import com.riandinp.freegamesdb.ui.category.CategoryViewModel
@@ -31,10 +30,6 @@ class ViewModelFactory private constructor(private val gameUseCase: GameUseCase)
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         @Suppress("UNCHECKED_CAST")
         when {
-            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(gameUseCase) as T
-            }
-
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(gameUseCase) as T
             }
