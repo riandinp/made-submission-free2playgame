@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riandinp.freegamesdb.core.domain.model.Game
-import com.riandinp.freegamesdb.core.ui.CardGameAdapter
+import com.riandinp.freegamesdb.ui.adapter.CardGameAdapter
 import com.riandinp.freegamesdb.databinding.ActivityCategoryBinding
 import com.riandinp.freegamesdb.ui.detail.DetailGameActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel

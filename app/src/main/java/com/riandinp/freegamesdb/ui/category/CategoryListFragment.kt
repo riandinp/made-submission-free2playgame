@@ -6,15 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.riandinp.freegamesdb.core.ui.CardCategoryAdapter
 import com.riandinp.freegamesdb.databinding.FragmentCategoryListBinding
+import com.riandinp.freegamesdb.ui.adapter.CardCategoryAdapter
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CategoryListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CategoryListFragment : Fragment() {
 
     private lateinit var categoryAdapter: CardCategoryAdapter
@@ -53,11 +48,5 @@ class CategoryListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            CategoryListFragment()
     }
 }

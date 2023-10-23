@@ -9,16 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riandinp.freegamesdb.core.data.Resource
 import com.riandinp.freegamesdb.core.domain.model.Game
-import com.riandinp.freegamesdb.core.ui.CardGameAdapter
 import com.riandinp.freegamesdb.databinding.FragmentHomeBinding
+import com.riandinp.freegamesdb.ui.adapter.CardGameAdapter
 import com.riandinp.freegamesdb.ui.detail.DetailGameActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
     private lateinit var gameAdapter: CardGameAdapter
@@ -81,11 +76,5 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            HomeFragment()
     }
 }

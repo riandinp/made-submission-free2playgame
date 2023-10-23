@@ -3,28 +3,21 @@ import com.riandinp.freegamesdb.Dependencies.sharedDependencies
 import com.riandinp.freegamesdb.Versions
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
 }
 
 android {
-    namespace = "com.riandinp.freegamesdb"
+    namespace = "com.riandinp.freegamesdb.core"
     compileSdk = Versions.App.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.riandinp.freegamesdb"
         minSdk = Versions.App.MIN_SDK
-        targetSdk = Versions.App.TARGET_SDK
-        versionCode = Versions.App.VERSION_CODE
-        versionName = Versions.App.VERSION_NAME
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildFeatures {
-        viewBinding = true
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -43,13 +36,21 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    dynamicFeatures += setOf(":favorite")
 }
 
 dependencies {
-    implementation(project(":core"))
-
     sharedDependencies()
-    implementation(Dependencies.AndroidX.COORDINATORLAYOUT)
-    implementation(Dependencies.LIKE_BUTTON)
+
+    implementation(Dependencies.Room.ROOM_RUNTIME)
+    implementation(Dependencies.Room.ROOM_KTX)
+    annotationProcessor(Dependencies.Room.ROOM_COMPILER)
+    ksp(Dependencies.Room.ROOM_COMPILER)
+
+    implementation(Dependencies.Retrofit.RETROFIT)
+    implementation(Dependencies.Retrofit.CONVERTER_GSON)
+    implementation(Dependencies.OKHTTP3.LOGGING_INTERCEPTOR)
+
+    implementation(Dependencies.KotlinX.COROUTINES_CORE)
+    implementation(Dependencies.KotlinX.COROUTINES_ANDROID)
+    api(Dependencies.AndroidX.LIFECYCLE_LIVEDATA_KTX)
 }

@@ -21,7 +21,7 @@ import com.like.OnLikeListener
 import com.riandinp.freegamesdb.R
 import com.riandinp.freegamesdb.core.data.Resource
 import com.riandinp.freegamesdb.core.domain.model.Game
-import com.riandinp.freegamesdb.core.ui.CardScreenshotsAdapter
+import com.riandinp.freegamesdb.ui.adapter.CardScreenshotsAdapter
 import com.riandinp.freegamesdb.databinding.ActivityDetailGameBinding
 import com.riandinp.freegamesdb.utils.getPublisherDeveloper
 import org.koin.androidx.viewmodel.ext.android.viewModel

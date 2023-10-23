@@ -1,30 +1,18 @@
-import com.riandinp.freegamesdb.Dependencies
 import com.riandinp.freegamesdb.Dependencies.sharedDependencies
 import com.riandinp.freegamesdb.Versions
 
 plugins {
-    id("com.android.application")
+    id("com.android.dynamic-feature")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
-    id("kotlin-parcelize")
 }
-
 android {
-    namespace = "com.riandinp.freegamesdb"
+    namespace = "com.riandinp.freegamesdb.favorite"
     compileSdk = Versions.App.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.riandinp.freegamesdb"
         minSdk = Versions.App.MIN_SDK
-        targetSdk = Versions.App.TARGET_SDK
-        versionCode = Versions.App.VERSION_CODE
-        versionName = Versions.App.VERSION_NAME
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildFeatures {
-        viewBinding = true
     }
 
     buildTypes {
@@ -36,6 +24,11 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,13 +36,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    dynamicFeatures += setOf(":favorite")
 }
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":app"))
 
     sharedDependencies()
-    implementation(Dependencies.AndroidX.COORDINATORLAYOUT)
-    implementation(Dependencies.LIKE_BUTTON)
 }

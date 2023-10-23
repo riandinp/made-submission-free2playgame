@@ -2,15 +2,16 @@ package com.riandinp.freegamesdb
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationBarView
 import com.riandinp.freegamesdb.databinding.ActivityMainBinding
 import com.riandinp.freegamesdb.ui.category.CategoryListFragment
-import com.riandinp.freegamesdb.ui.favorite.FavoriteFragment
 import com.riandinp.freegamesdb.ui.home.HomeFragment
 
-class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener{
+class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -22,38 +23,44 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         supportActionBar?.title = null
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, HomeFragment.newInstance())
-                .commit()
-            binding.appBarMain.tvToolbarTitle.text = getString(R.string.app_name)
+            moveNavigation(HomeFragment(), getString(R.string.app_name))
         }
         binding.bottomNavigation.setOnItemSelectedListener(this)
     }
 
-
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var fragment: Fragment? = null
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.home_nav -> {
-                fragment = HomeFragment.newInstance()
-                title = getString(R.string.app_name)
+                moveNavigation(HomeFragment(), getString(R.string.app_name))
             }
+
             R.id.category_nav -> {
-                fragment = CategoryListFragment.newInstance()
-                title = getString(R.string.category_label)
+                moveNavigation(CategoryListFragment(), getString(R.string.category_label))
             }
+
             R.id.favorite_nav -> {
-                fragment = FavoriteFragment.newInstance()
-                title = getString(R.string.favorite_label)
+                val moduleFragment = try {
+                    Class.forName("com.riandinp.freegamesdb.favorite.FavoriteFragment")
+                        .getDeclaredConstructor().newInstance() as Fragment
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Module not found", Toast.LENGTH_SHORT).show()
+                    null
+                }
+
+                if (moduleFragment != null) {
+                    moveNavigation(moduleFragment, getString(R.string.favorite_label))
+                }
             }
         }
-        if (fragment != null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, fragment)
-                .commit()
-        }
-        binding.appBarMain.tvToolbarTitle.text = title
         return true
+    }
+
+    private fun moveNavigation(fragment: Fragment, routeTitle: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.nav_host_fragment, fragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .commit()
+        binding.appBarMain.tvToolbarTitle.text = routeTitle
     }
 }

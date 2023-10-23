@@ -1,3 +1,4 @@
+@file:Suppress("UnstableApiUsage")
 pluginManagement {
     repositories {
         google()
@@ -16,3 +17,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "FreeGamesDB"
 include(":app")
+include(":core")
+include(":favorite")

@@ -1,4 +1,4 @@
-package com.riandinp.freegamesdb.ui.favorite
+package com.riandinp.freegamesdb.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

@@ -1,4 +1,4 @@
-package com.riandinp.freegamesdb.core.ui
+package com.riandinp.freegamesdb.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,9 @@ import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.databinding.ItemGameBinding
 import com.riandinp.freegamesdb.utils.getPublisherDeveloper
 
-class CardGameAdapter(private val onItemClickListener: OnItemClickListener? = null) : ListAdapter<Game, CardGameAdapter.CardGameViewHolder>(DIFF_CALLBACK) {
+class CardGameAdapter(private val onItemClickListener: OnItemClickListener? = null) : ListAdapter<Game, CardGameAdapter.CardGameViewHolder>(
+    DIFF_CALLBACK
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardGameViewHolder =
         CardGameViewHolder(

@@ -1,4 +1,4 @@
-package com.riandinp.freegamesdb.core.ui
+package com.riandinp.freegamesdb.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import com.riandinp.freegamesdb.databinding.ItemCategoryBinding
 
 class CardCategoryAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<CardCategoryAdapter.CardCategoryViewHolder>() {
 
-    val listCategory = listOf(
+    private val listCategory = listOf(
         "RPG",
         "Social",
         "Shooter",

@@ -1,4 +1,4 @@
-package com.riandinp.freegamesdb.core.ui
+package com.riandinp.freegamesdb.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View

@@ -48,5 +48,11 @@ val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
     factory { AppExecutors() }
-    single<IGameRepository> { GameRepository(get(), get(), get()) }
+    single<IGameRepository> {
+        GameRepository(
+            get(),
+            get(),
+            get()
+        )
+    }
 }
