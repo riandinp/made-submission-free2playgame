@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.riandinp.freegamesdb.R
 import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.databinding.ItemGameBinding
 import com.riandinp.freegamesdb.utils.getPublisherDeveloper
+import com.riandinp.freegamesdb.utils.loadImage
 
 class CardGameAdapter(private val onItemClickListener: OnItemClickListener? = null) : ListAdapter<Game, CardGameAdapter.CardGameViewHolder>(
     DIFF_CALLBACK
@@ -33,10 +33,7 @@ class CardGameAdapter(private val onItemClickListener: OnItemClickListener? = nu
         private val binding = ItemGameBinding.bind(itemView)
         fun bind(data: Game) {
             with(binding) {
-                Glide.with(itemView.context)
-                    .load(data.thumbnail)
-                    .placeholder(R.drawable.placeholder)
-                    .into(ivThumbnail)
+                ivThumbnail.loadImage(data.thumbnail)
                 tvTitleGame.text = data.title
                 tvPublisherDeveloper.text = getPublisherDeveloper(data.publisher, data.developer)
                 tvReleaseDate.text = data.releaseDate

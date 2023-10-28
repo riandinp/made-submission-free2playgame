@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.riandinp.freegamesdb.R
 import com.riandinp.freegamesdb.databinding.ItemScreenshotBinding
+import com.riandinp.freegamesdb.utils.loadImage
 
 class CardScreenshotsAdapter :
     ListAdapter<String, CardScreenshotsAdapter.CardScreenshotsViewHolder>(DIFF_CALLBACK) {
@@ -17,10 +17,7 @@ class CardScreenshotsAdapter :
         private val binding = ItemScreenshotBinding.bind(itemView)
         fun bindUrl(imageUrl: String) {
             with(binding) {
-                Glide.with(itemView.context)
-                    .load(imageUrl)
-                    .placeholder(R.drawable.placeholder)
-                    .into(ivScreenshot)
+                ivScreenshot.loadImage(imageUrl)
             }
         }
     }
