@@ -41,4 +41,5 @@ object Versions {
     const val RETROFIT = "2.9.0"
     const val LOGGING_INTERCEPTOR = "4.11.0"
     const val LIKE_BUTTON = "0.2.3"
+    const val LEAK_CANARY = "2.12"
 }

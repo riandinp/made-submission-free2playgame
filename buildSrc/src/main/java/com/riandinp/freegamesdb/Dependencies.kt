@@ -50,8 +50,11 @@ object Dependencies {
         const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.LOGGING_INTERCEPTOR}"
     }
 
-    private const val GLIDE = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
     const val LIKE_BUTTON = "com.github.jd-alexander:LikeButton:${Versions.LIKE_BUTTON}"
+
+    //shared depedencies
+    private const val GLIDE = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
+    private const val LEAK_CANARY = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
 
     fun DependencyHandlerScope.sharedDependencies() {
         "implementation"(AndroidX.CORE)
@@ -64,5 +67,6 @@ object Dependencies {
         "testImplementation"(Test.Unit.JUNIT)
         "androidTestImplementation"(Test.Integration.JUNIT)
         "androidTestImplementation"(Test.Integration.ESPRESSO_CORE)
+        "debugImplementation"(LEAK_CANARY)
     }
 }
