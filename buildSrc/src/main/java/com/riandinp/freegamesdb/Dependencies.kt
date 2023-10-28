@@ -28,7 +28,6 @@ object Dependencies {
         object Integration {
             const val JUNIT = "androidx.test.ext:junit:${Versions.Test.JUNIT_INTEGRATION}"
             const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:${Versions.Test.ESPRESSO_CORE}"
-            const val ANNOTATION = "androidx.annotation:annotation:${Versions.Test.ANNOTATION}"
         }
     }
 
