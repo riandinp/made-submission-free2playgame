@@ -16,8 +16,13 @@ android {
     defaultConfig {
         minSdk = Versions.App.MIN_SDK
 
+        buildConfigField("String", "BASE_URL", "\"https://www.freetogame.com/api/\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {

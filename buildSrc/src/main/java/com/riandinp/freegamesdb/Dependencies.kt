@@ -65,6 +65,5 @@ object Dependencies {
         "testImplementation"(Test.Unit.JUNIT)
         "androidTestImplementation"(Test.Integration.JUNIT)
         "androidTestImplementation"(Test.Integration.ESPRESSO_CORE)
-        "androidTestImplementation"(Test.Integration.ANNOTATION)
     }
 }
