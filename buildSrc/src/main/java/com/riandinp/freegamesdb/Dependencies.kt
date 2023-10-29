@@ -9,6 +9,7 @@ object Dependencies {
         const val CONSTRAINTLAYOUT = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.CONSTRAINTLAYOUT}"
         const val COORDINATORLAYOUT = "androidx.coordinatorlayout:coordinatorlayout:${Versions.AndroidX.COORDINATORLAYOUT}"
         const val LIFECYCLE_LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.AndroidX.LIFECYCLE}"
+        const val MULTIDEX = "androidx.multidex:multidex:${Versions.AndroidX.MULTIDEX}"
     }
 
     object KotlinX {
@@ -51,6 +52,8 @@ object Dependencies {
     }
 
     const val LIKE_BUTTON = "com.github.jd-alexander:LikeButton:${Versions.LIKE_BUTTON}"
+    const val SQL_CIPHER = "net.zetetic:android-database-sqlcipher:${Versions.SQL_CIPHER}"
+    const val SQL_LITE = "androidx.sqlite:sqlite:${Versions.SQL_LITE}"
 
     //shared depedencies
     private const val GLIDE = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
@@ -60,6 +63,7 @@ object Dependencies {
         "implementation"(AndroidX.CORE)
         "implementation"(AndroidX.APPCOMPAT)
         "implementation"(AndroidX.CONSTRAINTLAYOUT)
+        "implementation"(AndroidX.MULTIDEX)
         "implementation"(Google.MATERIAL)
         "implementation"(DI.KOIN_ANDROID)
         "implementation"(GLIDE)

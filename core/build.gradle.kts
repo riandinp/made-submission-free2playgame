@@ -26,8 +26,15 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -58,4 +65,7 @@ dependencies {
     implementation(Dependencies.KotlinX.COROUTINES_CORE)
     implementation(Dependencies.KotlinX.COROUTINES_ANDROID)
     api(Dependencies.AndroidX.LIFECYCLE_LIVEDATA_KTX)
+
+    implementation(Dependencies.SQL_CIPHER)
+    implementation(Dependencies.SQL_LITE)
 }

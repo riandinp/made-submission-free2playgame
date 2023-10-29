@@ -9,6 +9,9 @@ import com.riandinp.freegamesdb.core.data.source.remote.RemoteDataSource
 import com.riandinp.freegamesdb.core.data.source.remote.network.ApiService
 import com.riandinp.freegamesdb.core.domain.repository.IGameRepository
 import com.riandinp.freegamesdb.core.utlis.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -20,23 +23,33 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<GameDatabase>().gameDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("dicoding-made".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             GameDatabase::class.java, "games.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
 val networkModule = module {
     single {
         val loggingInterceptor =
-            if(BuildConfig.DEBUG) { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) }
-            else { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)}
+            if(BuildConfig.DEBUG) HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            else HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
+
+        val hostname = "freetogame.com"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostname, "sha256/aibC8oPHcGrFgJi2WmuIncc4TkOr+XPZfupJR+2yZ9g=")
+            .build()
 
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
     single {
