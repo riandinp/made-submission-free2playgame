@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setObserver() {
-        homeViewModel.games.observe(viewLifecycleOwner) { games ->
+        homeViewModel.getListGames().observe(viewLifecycleOwner) { games ->
             if (games != null) {
                 when (games) {
                     is Resource.Loading -> binding.pbLoadingScreen.visibility = View.VISIBLE

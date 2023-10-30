@@ -1,4 +1,4 @@
-package com.riandinp.freegamesdb.core.utlis
+package com.riandinp.freegamesdb.core.utils
 
 import com.riandinp.freegamesdb.core.data.source.local.entity.GameEntity
 import com.riandinp.freegamesdb.core.data.source.remote.response.GameResponse

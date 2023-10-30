@@ -27,5 +27,5 @@ interface GameDao {
     suspend fun insertGames(game: List<GameEntity>)
 
     @Update
-    fun updateGames(tourism: GameEntity)
+    fun updateGames(game: GameEntity)
 }
