@@ -72,8 +72,8 @@ object Dependencies {
         "implementation"(DI.KOIN_ANDROID)
         "implementation"(GLIDE)
 
-        "implementation"(Dependencies.KotlinX.COROUTINES_CORE)
-        "implementation"(Dependencies.KotlinX.COROUTINES_ANDROID)
+        "implementation"(KotlinX.COROUTINES_CORE)
+        "implementation"(KotlinX.COROUTINES_ANDROID)
         "testImplementation"(KotlinX.COROUTINES_TEST)
 
         "testImplementation"(Test.Unit.JUNIT)
