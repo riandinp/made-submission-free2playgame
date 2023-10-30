@@ -9,11 +9,14 @@ object Dependencies {
         const val CONSTRAINTLAYOUT = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.CONSTRAINTLAYOUT}"
         const val COORDINATORLAYOUT = "androidx.coordinatorlayout:coordinatorlayout:${Versions.AndroidX.COORDINATORLAYOUT}"
         const val LIFECYCLE_LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.AndroidX.LIFECYCLE}"
+        const val MULTIDEX = "androidx.multidex:multidex:${Versions.AndroidX.MULTIDEX}"
+        const val ARCH_CORE_TESTING = "androidx.arch.core:core-testing:${Versions.AndroidX.ARCH_CORE}"
     }
 
     object KotlinX {
         const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KotlinX.COROUTINES}"
-        const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KotlinX.COROUTINES}"
+        const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KotlinX.COROUTINES}"
+        const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.KotlinX.COROUTINES}"
     }
 
     object Google {
@@ -23,6 +26,8 @@ object Dependencies {
     object Test {
         object Unit {
             const val JUNIT = "junit:junit:${Versions.Test.JUNIT}"
+            const val MOCKITO_CORE = "org.mockito:mockito-core:${Versions.Test.MOCKITO}"
+            const val MOCKITO_INLINE = "org.mockito:mockito-inline:${Versions.Test.MOCKITO}"
         }
 
         object Integration {
@@ -50,19 +55,34 @@ object Dependencies {
         const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.LOGGING_INTERCEPTOR}"
     }
 
-    private const val GLIDE = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
     const val LIKE_BUTTON = "com.github.jd-alexander:LikeButton:${Versions.LIKE_BUTTON}"
+    const val SQL_CIPHER = "net.zetetic:android-database-sqlcipher:${Versions.SQL_CIPHER}"
+    const val SQL_LITE = "androidx.sqlite:sqlite:${Versions.SQL_LITE}"
+
+    //shared depedencies
+    private const val GLIDE = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
+    private const val LEAK_CANARY = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
 
     fun DependencyHandlerScope.sharedDependencies() {
         "implementation"(AndroidX.CORE)
         "implementation"(AndroidX.APPCOMPAT)
         "implementation"(AndroidX.CONSTRAINTLAYOUT)
+        "implementation"(AndroidX.MULTIDEX)
         "implementation"(Google.MATERIAL)
         "implementation"(DI.KOIN_ANDROID)
         "implementation"(GLIDE)
 
+        "implementation"(KotlinX.COROUTINES_CORE)
+        "implementation"(KotlinX.COROUTINES_ANDROID)
+        "testImplementation"(KotlinX.COROUTINES_TEST)
+
         "testImplementation"(Test.Unit.JUNIT)
+        "testImplementation"(Test.Unit.MOCKITO_CORE)
+        "testImplementation"(Test.Unit.MOCKITO_INLINE)
+        "testImplementation"(AndroidX.ARCH_CORE_TESTING)
+
         "androidTestImplementation"(Test.Integration.JUNIT)
         "androidTestImplementation"(Test.Integration.ESPRESSO_CORE)
+        "debugImplementation"(LEAK_CANARY)
     }
 }

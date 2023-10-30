@@ -1,4 +1,4 @@
-package com.riandinp.freegamesdb.core.utlis
+package com.riandinp.freegamesdb.core.utils
 
 import androidx.room.TypeConverter
 

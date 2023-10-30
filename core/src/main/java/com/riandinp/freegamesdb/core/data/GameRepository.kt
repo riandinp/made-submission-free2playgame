@@ -7,8 +7,8 @@ import com.riandinp.freegamesdb.core.data.source.remote.response.DetailGameRespo
 import com.riandinp.freegamesdb.core.data.source.remote.response.GameResponse
 import com.riandinp.freegamesdb.core.domain.model.Game
 import com.riandinp.freegamesdb.core.domain.repository.IGameRepository
-import com.riandinp.freegamesdb.core.utlis.AppExecutors
-import com.riandinp.freegamesdb.core.utlis.DataMapper
+import com.riandinp.freegamesdb.core.utils.AppExecutors
+import com.riandinp.freegamesdb.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

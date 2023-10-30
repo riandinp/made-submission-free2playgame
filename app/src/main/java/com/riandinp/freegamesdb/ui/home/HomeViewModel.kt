@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.riandinp.freegamesdb.core.domain.usecase.GameUseCase
 
-class HomeViewModel(gameUseCase: GameUseCase) : ViewModel() {
+class HomeViewModel(private val gameUseCase: GameUseCase) : ViewModel() {
 
-    val games = gameUseCase.getAllGames().asLiveData()
+    fun getListGames() = gameUseCase.getAllGames().asLiveData()
 }
