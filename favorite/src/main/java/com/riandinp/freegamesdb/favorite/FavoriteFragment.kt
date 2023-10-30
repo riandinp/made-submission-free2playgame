@@ -47,7 +47,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setObserver() {
-        favoriteViewModel.favoriteGames.observe(viewLifecycleOwner) { games ->
+        favoriteViewModel.getAllFavoriteGames().observe(viewLifecycleOwner) { games ->
             gameAdapter.submitList(games)
             binding.vwNoData.root.isVisible = games.isNullOrEmpty()
         }

@@ -10,11 +10,13 @@ object Dependencies {
         const val COORDINATORLAYOUT = "androidx.coordinatorlayout:coordinatorlayout:${Versions.AndroidX.COORDINATORLAYOUT}"
         const val LIFECYCLE_LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.AndroidX.LIFECYCLE}"
         const val MULTIDEX = "androidx.multidex:multidex:${Versions.AndroidX.MULTIDEX}"
+        const val ARCH_CORE_TESTING = "androidx.arch.core:core-testing:${Versions.AndroidX.ARCH_CORE}"
     }
 
     object KotlinX {
         const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KotlinX.COROUTINES}"
-        const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KotlinX.COROUTINES}"
+        const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KotlinX.COROUTINES}"
+        const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.KotlinX.COROUTINES}"
     }
 
     object Google {
@@ -24,6 +26,8 @@ object Dependencies {
     object Test {
         object Unit {
             const val JUNIT = "junit:junit:${Versions.Test.JUNIT}"
+            const val MOCKITO_CORE = "org.mockito:mockito-core:${Versions.Test.MOCKITO}"
+            const val MOCKITO_INLINE = "org.mockito:mockito-inline:${Versions.Test.MOCKITO}"
         }
 
         object Integration {
@@ -68,7 +72,15 @@ object Dependencies {
         "implementation"(DI.KOIN_ANDROID)
         "implementation"(GLIDE)
 
+        "implementation"(Dependencies.KotlinX.COROUTINES_CORE)
+        "implementation"(Dependencies.KotlinX.COROUTINES_ANDROID)
+        "testImplementation"(KotlinX.COROUTINES_TEST)
+
         "testImplementation"(Test.Unit.JUNIT)
+        "testImplementation"(Test.Unit.MOCKITO_CORE)
+        "testImplementation"(Test.Unit.MOCKITO_INLINE)
+        "testImplementation"(AndroidX.ARCH_CORE_TESTING)
+
         "androidTestImplementation"(Test.Integration.JUNIT)
         "androidTestImplementation"(Test.Integration.ESPRESSO_CORE)
         "debugImplementation"(LEAK_CANARY)

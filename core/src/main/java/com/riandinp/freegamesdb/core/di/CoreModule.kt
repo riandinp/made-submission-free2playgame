@@ -8,7 +8,7 @@ import com.riandinp.freegamesdb.core.data.source.local.room.GameDatabase
 import com.riandinp.freegamesdb.core.data.source.remote.RemoteDataSource
 import com.riandinp.freegamesdb.core.data.source.remote.network.ApiService
 import com.riandinp.freegamesdb.core.domain.repository.IGameRepository
-import com.riandinp.freegamesdb.core.utlis.AppExecutors
+import com.riandinp.freegamesdb.core.utils.AppExecutors
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import okhttp3.CertificatePinner

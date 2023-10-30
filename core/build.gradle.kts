@@ -62,8 +62,6 @@ dependencies {
     implementation(Dependencies.Retrofit.CONVERTER_GSON)
     implementation(Dependencies.OKHTTP3.LOGGING_INTERCEPTOR)
 
-    implementation(Dependencies.KotlinX.COROUTINES_CORE)
-    implementation(Dependencies.KotlinX.COROUTINES_ANDROID)
     api(Dependencies.AndroidX.LIFECYCLE_LIVEDATA_KTX)
 
     implementation(Dependencies.SQL_CIPHER)
