@@ -66,15 +66,8 @@ class DetailViewModelTest {
 
     @Test
     fun `set favorite game`() = runTest {
-        game = flow {
-            emit(Resource.Loading())
-            emit(Resource.Success(ListGamesDummy.generateGamesAsDomain(description = DESCRIPTION).first()))
-        }
         val exampleData = ListGamesDummy.generateGamesAsDomain().first()
-        Mockito.`when`(gamesUseCase.getDetailGame(exampleData)).thenReturn(game)
-
         detailViewModel.setFavoriteGame(exampleData, true)
-
         verify(gamesUseCase, atLeastOnce()).setFavoriteGames(exampleData, true)
     }
 }
