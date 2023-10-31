@@ -7,7 +7,14 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("jacoco")
+    id("plugins.jacoco-report")
 }
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
 
 android {
     namespace = "com.riandinp.freegamesdb"
@@ -24,17 +31,24 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    @Suppress("UnstableApiUsage")
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
+    }
+
     buildFeatures {
         viewBinding = true
     }
 
     buildTypes {
-        getByName("debug") {
+        debug {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            enableUnitTestCoverage = true
         }
         release {
             isMinifyEnabled = true
@@ -42,6 +56,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            enableUnitTestCoverage = true
         }
     }
     compileOptions {

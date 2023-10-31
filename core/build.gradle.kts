@@ -7,6 +7,12 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("jacoco")
+    id("plugins.jacoco-report")
+}
+
+jacoco {
+    toolVersion = "0.8.11"
 }
 
 android {
@@ -21,6 +27,12 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    @Suppress("UnstableApiUsage")
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
+    }
+
     buildFeatures {
         buildConfig = true
     }
@@ -32,6 +44,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            enableUnitTestCoverage = true
         }
         release {
             isMinifyEnabled = true
@@ -39,6 +52,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            enableUnitTestCoverage = true
         }
     }
     compileOptions {

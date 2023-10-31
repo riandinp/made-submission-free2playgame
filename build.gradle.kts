@@ -6,3 +6,9 @@ plugins {
     id("com.android.library") version "8.1.1" apply false
     id("com.android.dynamic-feature") version "8.1.1" apply false
 }
+
+buildscript {
+    dependencies {
+        classpath("org.jacoco:org.jacoco.core:0.8.11")
+    }
+}

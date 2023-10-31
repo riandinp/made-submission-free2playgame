@@ -5,7 +5,14 @@ plugins {
     id("com.android.dynamic-feature")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("jacoco")
+    id("plugins.jacoco-report")
 }
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
 android {
     namespace = "com.riandinp.freegamesdb.favorite"
     compileSdk = Versions.App.COMPILE_SDK
@@ -15,8 +22,24 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    @Suppress("UnstableApiUsage")
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
+    }
+
     buildFeatures {
         viewBinding = true
+    }
+
+    buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+        }
+
+        release {
+            enableUnitTestCoverage = true
+        }
     }
 
     compileOptions {
