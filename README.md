@@ -1,4 +1,4 @@
-# Free to Games DB App
+# Free to Games App
 <p>
   <img src="https://github.com/riandinp/made-submission-free2playgame/blob/master/app/src/main/ic_launcher-playstore.png" alt="logoApp" width=200px/ style="border-radius: 25px;">
 </p>
