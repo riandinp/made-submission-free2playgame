@@ -5,3 +5,8 @@ plugins {
 repositories {
     mavenCentral()
 }
+
+
+dependencies {
+    implementation("org.jacoco:org.jacoco.core:0.8.11")
+}
