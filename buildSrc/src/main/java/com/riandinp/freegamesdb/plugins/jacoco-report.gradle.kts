@@ -37,7 +37,7 @@ private val classDirectoriesTree = fileTree(buildDir) {
     exclude(fileFilter)
 }
 
-private val sourceDirectoriesTree = fileTree("${project.projectDir}") {
+private val sourceDirectoriesTree = fileTree("${project.buildDir}") {
     include(
         "src/main/java/**",
         "src/main/kotlin/**",
@@ -75,38 +75,31 @@ fun JacocoReport.setDirectories() {
 }
 
 
-tasks.register<JacocoReport>("jacocoAndroidTestReport") {
-    description = "Code coverage report for Unit tests."
-    group = "Reporting"
-    dependsOn("testDebugUnitTest", "createDebugUnitTestCoverageReport")
-    reports {
-        reports()
-    }
-    setDirectories()
-}
-
-tasks.register<JacocoCoverageVerification>("jacocoAndroidCoverageVerification") {
-    description = "Code coverage verification for Unit tests."
-    group = "Verification"
-    dependsOn("testDebugUnitTest", "createDebugUnitTestCoverageReport")
-    violationRules {
-        rule {
-            limit {
-                counter = "INSTRUCTIONAL"
-                value = "COVEREDRATIO"
-                minimum = "0.1".toBigDecimal()
-            }
-        }
-    }
-    setDirectories()
-}
-
-fun Project.setupJacoco(name: String, description: String = "Generate Jacoco coverage reports after running tests.") {
-    this.tasks.register<JacocoReport>(name) {
-        this.description = description
+if (tasks.findByName("jacocoAndroidTestReport") == null) {
+    tasks.register<JacocoReport>("jacocoAndroidTestReport") {
+        description = "Code coverage report for Unit tests."
         group = "Reporting"
+        dependsOn("testDebugUnitTest", "createDebugUnitTestCoverageReport")
         reports {
             reports()
+        }
+        setDirectories()
+    }
+}
+
+if (tasks.findByName("jacocoAndroidCoverageVerification") == null) {
+    tasks.register<JacocoCoverageVerification>("jacocoAndroidCoverageVerification") {
+        description = "Code coverage verification for Unit tests."
+        group = "Verification"
+        dependsOn("testDebugUnitTest", "createDebugUnitTestCoverageReport")
+        violationRules {
+            rule {
+                limit {
+                    counter = "INSTRUCTIONAL"
+                    value = "COVEREDRATIO"
+                    minimum = "0.1".toBigDecimal()
+                }
+            }
         }
         setDirectories()
     }
