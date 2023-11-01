@@ -5,8 +5,7 @@ plugins {
     id("com.android.dynamic-feature")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
-    id("jacoco")
-    id("plugins.jacoco-report")
+    id("jacoco-reports")
 }
 
 jacoco {
