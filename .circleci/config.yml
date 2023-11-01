@@ -51,7 +51,7 @@ jobs:
           name: Generate Code Coverage
           command: ./gradlew jacocoAndroidTestReport
       - codecov/upload:
-          file: 'core/build/reports/coverage/test/debug/report.xml'
+          file: ~/build/reports/coverage/test/debug/report.xml
       - store_test_results:
           path: ~/test-results
       - store_artifacts:  
